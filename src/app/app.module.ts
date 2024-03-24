@@ -25,7 +25,7 @@ import { CartComponent } from './component/user/cart/cart.component';
 import { ProfileComponent } from './component/user/profile/profile.component';
 
 import { OrderComponent } from './component/user/order/order.component';
-// import { Input, initMDB } from "mdb-ui-kit";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +58,7 @@ import { OrderComponent } from './component/user/order/order.component';
     BrowserAnimationsModule,
     WebcamModule,
     FormsModule,
+    
     
   ],
   providers: [],

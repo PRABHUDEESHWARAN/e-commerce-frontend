@@ -8,12 +8,14 @@ import { data } from 'src/assets/data';
 import { OrderItemDetails } from 'src/app/model/order/orderItemDetails';
 import { ProductsService } from 'src/app/service/products.service';
 import { productData } from 'src/assets/productData';
+import { Address } from 'src/app/model/Address';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent {
+  
 
   constructor(private router:Router,private notify:NotifyService,private orderService:OrderService,private route:ActivatedRoute,private productService:ProductsService){
 
@@ -24,6 +26,14 @@ export class OrderComponent {
   ExPData=productData;
   orderItemDetails:OrderItemDetails[]=[]
   customerId:number=0;
+  addressData:Address={
+    addressId:0,
+    customerId:0,
+    doorNo:0,
+    city:'',
+    state:'',
+    pincode:0
+  }
   ngOnInit() {
     this.customerId=parseInt(this.route.snapshot.paramMap.get('customerId')?? '',10);
     this.orderService.createOrder(this.customerId).subscribe({
@@ -55,6 +65,9 @@ export class OrderComponent {
         
       }
     })
+  }
+  handleAddressSave(){
+    this.orderResponse!.order.address=this.addressData;
   }
 
 }
