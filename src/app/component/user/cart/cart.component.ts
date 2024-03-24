@@ -109,7 +109,7 @@ export class CartComponent {
   }
 
 
-  handleCheckout(){
-   this.router.navigate(['user/order'],); 
+  handleCheckout(customerId:number){
+   this.router.navigate(['user/order',customerId],); 
   }
 }

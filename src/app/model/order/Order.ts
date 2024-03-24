@@ -1,5 +1,6 @@
 import { Address } from "../Address";
-import { paymentDetails } from "../payment/paymentDetails";
+import { paymentDetails } from "../payment/PaymentDetails";
+
 import { OrderItem } from "./OrderItem";
 
 export interface Order {

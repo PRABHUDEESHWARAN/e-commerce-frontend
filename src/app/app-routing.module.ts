@@ -71,6 +71,7 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'order', component: OrderComponent },
+      { path: 'order/:customerId', component: OrderComponent },
     ],
   },
   { path: '**', redirectTo: 'home' },

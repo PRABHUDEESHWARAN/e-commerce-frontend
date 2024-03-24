@@ -5,5 +5,5 @@ export interface paymentDetails {
     paymentMethod:string,
     orderId:number,
     status:boolean,
-    cardInfo:CardInfo
+    cardInfo:CardInfo[]
   }
