@@ -15,3 +15,9 @@
 .franklin{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+.plus-button {
+    cursor: pointer;
+  }
+  .minus-button {
+    cursor: pointer;
+  }

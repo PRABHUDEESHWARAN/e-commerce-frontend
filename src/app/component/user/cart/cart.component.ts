@@ -107,7 +107,24 @@ export class CartComponent {
 
 
   }
+  handlePlus(productId:number){
+    this.cartService.addToCart(productId,this.cartData!.id).subscribe({
+      next:(res)=>{
+        this.cartData=res;
+        this.cartItemDetails.filter((data)=>(data.product?.id==productId)).forEach((p)=>{
+          p.quantity!+=1;
+          p.totalPrice=p.quantity!*p.product!.price;
+        });
+        
+      },
+      error:(err)=>{
+        this.notify.showError("Error Updating Cart","CarStore");
+      }
+    })
+  }
+  handleMinus(){
 
+  }
 
   handleCheckout(customerId:number){
    this.router.navigate(['user/order',customerId],); 

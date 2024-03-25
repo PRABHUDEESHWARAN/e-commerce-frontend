@@ -13,6 +13,7 @@ import { TransactionDetails } from 'src/app/model/payment/TransactionDetails';
 import { confirmOrderReq } from 'src/app/model/order/confirmOrderReq';
 import jsPDF from 'jspdf';
 import { NgZone } from '@angular/core';
+import { UserService } from 'src/app/service/user/user.service';
 declare var Razorpay: any;
 @Component({
   selector: 'app-order',
@@ -26,7 +27,8 @@ export class OrderComponent {
     private orderService: OrderService,
     private route: ActivatedRoute,
     private productService: ProductsService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private userService:UserService
 
   ) {
     this.isStatus=false;
@@ -54,6 +56,15 @@ export class OrderComponent {
     this.orderService.createOrder(this.customerId).subscribe({
       next: (res) => {
         this.orderResponse = res;
+        this.userService.getUserAddress(this.customerId).subscribe({
+          next:(res)=>{
+            this.orderResponse!.order.address=res[0]
+            
+          },
+          error:(err)=>{
+            this.notify.showError("Cannot load default Address","CarStore");
+          }
+        })
         this.orderResponse.order.orderItem.map((data, _index) => {
           const tempProduct = this.productService
             .getProduct(data.productId)
@@ -79,6 +90,8 @@ export class OrderComponent {
         this.notify.showError('Cannot create Order', 'E-Commerce');
       },
     });
+
+    
   }
   handleAddressSave(orderId: number) {
     const newAddress = {

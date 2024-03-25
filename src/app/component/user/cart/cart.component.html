@@ -38,7 +38,9 @@
                                 
                             </div>
                             <div class="col-2  d-flex justify-content-end   text-center fw-bold  rounded">
-                                <input class="w-50 " type=number value="{{data.quantity}}">
+                                <div class="minus-button" (click)="handleMinus()">➖</div>
+                                <input class="w-25 mx-3 rounded-2 shadow-sm text-center  " type=text value="{{data.quantity}}" >
+                                <div class="plus-button" (click)="handlePlus(data.product!.id)">➕</div>
                             </div>
                             <div class="col-2   text-center fw-bold rounded ">{{data.totalPrice|currency:'INR'}}</div>
                             

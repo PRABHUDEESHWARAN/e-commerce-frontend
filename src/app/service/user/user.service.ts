@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Address } from 'src/app/model/Address';
 import { Profile } from 'src/app/model/Profile';
 
 @Injectable({
@@ -27,6 +28,16 @@ export class UserService {
       }
       
     });
+  }
+
+  getUserAddress(customerId:number):Observable<Address[]>{
+    return this.httpClient.post<Address[]>(`${this.baseURL}/api/customer/addresses/${customerId}`,null,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}`
+      },
+      
+      
+    })
   }
 
 }
