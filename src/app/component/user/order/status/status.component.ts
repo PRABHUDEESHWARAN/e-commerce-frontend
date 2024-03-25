@@ -6,7 +6,7 @@ import { Order } from 'src/app/model/order/Order';
 import { OrderResponse } from 'src/app/model/order/OrderResponse';
 import { OrderItemDetails } from 'src/app/model/order/orderItemDetails';
 import { DatePipe } from '@angular/common';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
@@ -16,7 +16,7 @@ export class StatusComponent {
   @Input() orderItemDetails!: OrderItemDetails[];
   @Input() orderResponse!:OrderResponse
   currentDate: any;
-  constructor(private route: ActivatedRoute, private datePipe: DatePipe) {
+  constructor(private route: ActivatedRoute, private datePipe: DatePipe,private router:Router) {
     this.currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
   }
 
@@ -59,5 +59,7 @@ export class StatusComponent {
       );
       pdf.save('invoice.pdf');
     });
+
+    this.router.navigateByUrl('products');
   }
 }

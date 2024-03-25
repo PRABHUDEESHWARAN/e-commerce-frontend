@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="card">
-    <div class="card-body">
+<div class="container d-flex  ">
+  <div class="card rounded-2 shadow-sm my-5 ">
+    <div class="card-body d-flex flex-column  justify-content-center align-items-center ">
       <img
         [src]="product?.imageUrl"
         style="
@@ -9,26 +9,30 @@
           max-width: 300px;
           max-height: 300px;
         "
-        class="card-img-top img-thumbnail"
+        class="card-img-top img-thumbnail rounded-3 shadow-sm mb-4 "
       />
-      <div class="row my-2">
+      
+      <div class="row my-2 d-flex justify-content-center ">
+        <hr class="mx-3 ">
         <div class="col">
-          <h5 class="card-title">Name: {{ product?.name }}</h5>
+          <h5 class="card-title text-center franklin">Name: {{ product?.name }}</h5>
         </div>
         <div class="col">
-          <h5 class="card-text">
+          <h5 class="card-text text-center franklin">
             Price:
-            {{ product?.price }}
+            {{ product?.price | currency:"INR" }}
           </h5>
         </div>
+        <hr class="mx-3 ">
       </div>
-      <div class="row my-2">
-        <div class="col">
-          <h5>Description: {{ product?.description }}</h5>
+      <div class="container  my-2 d-flex flex-column  justify-content-center  ">
+        <div class="col ">
+          <h5 class="jovie"><strong>Description:</strong> {{ product?.description }}</h5>
         </div>
         <div class="col">
-          <h5>Category: {{ product?.category }}</h5>
+          <h5 class="text-center franklin">Category: {{ product?.category }}</h5>
         </div>
+        <hr class="mx-3 ">
       </div>
       <div class="row my-2">
         <div class="col">
