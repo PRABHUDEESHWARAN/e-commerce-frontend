@@ -18,7 +18,6 @@ import { ProfileComponent } from './component/user/profile/profile.component';
 import { OrderComponent } from './component/user/order/order.component';
 import { StatusComponent } from './component/user/order/status/status.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
@@ -40,7 +39,7 @@ const routes: Routes = [
     path: 'products/category',
     component: CategoryProductsComponent,
     canActivate: [authGuard()],
-    children: [{ path: ':productId', component: ProductDescriptionComponent }]
+    children: [{ path: ':productId', component: ProductDescriptionComponent }],
   },
   {
     path: 'search',
@@ -71,9 +70,21 @@ const routes: Routes = [
     children: [
       { path: 'cart', component: CartComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'order', component: OrderComponent  },
-      {path:'order/status',component:StatusComponent},
-      { path: 'order/:customerId', component: OrderComponent },
+      {
+        path: 'order',
+        component: OrderComponent,
+      },
+      {
+        path: 'order/:customerId',
+        component: OrderComponent,
+        canActivateChild: [authGuard()],
+        children: [
+          {
+            path: 'status',
+            component: StatusComponent,
+          },
+        ],
+      },
     ],
   },
   { path: '**', redirectTo: 'home' },

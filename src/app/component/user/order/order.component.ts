@@ -12,7 +12,8 @@ import { Address } from 'src/app/model/Address';
 import { TransactionDetails } from 'src/app/model/payment/TransactionDetails';
 import { confirmOrderReq } from 'src/app/model/order/confirmOrderReq';
 import jsPDF from 'jspdf';
-declare var Razorpay:any;
+import { NgZone } from '@angular/core';
+declare var Razorpay: any;
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -24,8 +25,12 @@ export class OrderComponent {
     private notify: NotifyService,
     private orderService: OrderService,
     private route: ActivatedRoute,
-    private productService: ProductsService
-  ) {}
+    private productService: ProductsService,
+    private ngZone: NgZone
+
+  ) {
+    
+  }
   orderResponse?: OrderResponse;
   value: string = '';
   Exdata = data;
@@ -103,8 +108,8 @@ export class OrderComponent {
   placeOrder(orderId: number) {
     this.orderService.createTransaction(orderId).subscribe({
       next: (res) => {
-        console.log(res);
-        
+        console.log("here"+res);
+
         this.openTransactionModel(res);
       },
       error: (err) => {
@@ -113,59 +118,64 @@ export class OrderComponent {
     });
   }
 
-  openTransactionModel(response:TransactionDetails){
-    var options={
-      order_id:response.transactionId,
-      key_id:response.key,
-      amount:response.amount,
-      currency:response.currency,
-      name:'FORD CarStore',
-      description:'Payment for Order',
-      image: 'https://assets.turbologo.com/blog/en/2019/10/19084934/ford-logo-illustration.jpg',
-      handler:(res:any)=>{
-        console.log(res);
-        
-        if(res!=null && res.razorpay_payment_id !=null){
-          this.processResponse(res);
-        }else{
-          this.notify.showError("Payment Failed","CarStore");
-        }
-      },
-      prefill:{
-        name:'CarStore 🚗',
-        email:'fordcarstore@gmail.com',
-        contact:1234567893
-      },
-      notes:{
-        address:"ELCOT SEZ, Chennai"
-      },
-      theme:{
-        color:'#1A88E6'
-      }
-    }
-    var razorPayObject=new Razorpay(options);
-    razorPayObject.open();
-  }
-  processResponse(resp:any){
-    this.orderResponse!.order.transactionId=resp.razorpay_payment_id;
-    let confirmData:confirmOrderReq={
-      transactionId:this.orderResponse!.order.transactionId,
-      orderId:this.orderResponse!.order.id
-    }
-    this.orderService.confirmOrder(confirmData).subscribe({
-      next:(res)=>{
-        if(res!=null){
-          this.orderResponse!.order=res;
-          this.notify.showSuccess("Order Updated : PAID","CarStore");
-          this.router.navigate(['order/status']);
-        }
-      },
-      error:(err)=>{
-        this.notify.showError("Failed Updating Order","CarStore");
-      }
-    })
-    
-  }
+  openTransactionModel(response: TransactionDetails) {
+    this.ngZone.run(() => {
+      // Your existing code here
+      var options = {
+        order_id: response.transactionId,
+        key_id: response.key,
+        amount: response.amount,
+        currency: response.currency,
+        name: 'FORD CarStore',
+        description: 'Payment for Order',
+        image:
+          'https://assets.turbologo.com/blog/en/2019/10/19084934/ford-logo-illustration.jpg',
+        handler: (res: any) => {
+          console.log(res);
 
-  
+          if (res != null && res.razorpay_payment_id != null) {
+            this.processResponse(res);
+          } else {
+            this.notify.showError('Payment Failed', 'CarStore');
+          }
+        },
+        prefill: {
+          name: 'CarStore 🚗',
+          email: 'fordcarstore@gmail.com',
+          contact: 9499014212,
+        },
+        notes: {
+          address: 'ELCOT SEZ, Chennai',
+        },
+        theme: {
+          color: '#1A88E6',
+        },
+      };
+      var razorPayObject = new Razorpay(options);
+      razorPayObject.open();
+    });
+  }
+  processResponse(resp: any) {
+    this.ngZone.run(() => {
+      // Your existing code here
+      this.orderResponse!.order.transactionId = resp.razorpay_payment_id;
+      let confirmData: confirmOrderReq = {
+        transactionId: this.orderResponse!.order.transactionId,
+        orderId: this.orderResponse!.order.id,
+      };
+      this.orderService.confirmOrder(confirmData).subscribe({
+        next: (res) => {
+          if (res != null) {
+            this.orderResponse!.order = res;
+            this.notify.showSuccess('Order Updated : PAID', 'CarStore');
+            this.router.navigateByUrl('user/order/status');
+            
+          }
+        },
+        error: (err) => {
+          this.notify.showError('Failed Updating Order', 'CarStore');
+        },
+      });
+    });
+  }
 }
