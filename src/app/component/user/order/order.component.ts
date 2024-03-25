@@ -31,6 +31,7 @@ export class OrderComponent {
   ) {
     
   }
+  isStatus:boolean=false;
   orderResponse?: OrderResponse;
   value: string = '';
   Exdata = data;
@@ -168,6 +169,7 @@ export class OrderComponent {
           if (res != null) {
             this.orderResponse!.order = res;
             this.notify.showSuccess('Order Updated : PAID', 'CarStore');
+            this.isStatus=true;
             this.router.navigateByUrl('user/order/status');
             
           }

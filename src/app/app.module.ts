@@ -24,6 +24,7 @@ import { CartComponent } from './component/user/cart/cart.component';
 import { ProfileComponent } from './component/user/profile/profile.component';
 import { OrderComponent } from './component/user/order/order.component';
 import { StatusComponent } from './component/user/order/status/status.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { StatusComponent } from './component/user/order/status/status.component'
     
     
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
