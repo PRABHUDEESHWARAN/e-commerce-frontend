@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/home/login/login.component';
@@ -23,9 +22,8 @@ import { CategoryProductsComponent } from './component/product/category-products
 import { UserComponent } from './component/user/user.component';
 import { CartComponent } from './component/user/cart/cart.component';
 import { ProfileComponent } from './component/user/profile/profile.component';
-
 import { OrderComponent } from './component/user/order/order.component';
-
+import { StatusComponent } from './component/user/order/status/status.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +43,7 @@ import { OrderComponent } from './component/user/order/order.component';
     CartComponent,
     ProfileComponent,
     OrderComponent,
+    StatusComponent,
     
   ],
   imports: [
@@ -58,6 +57,7 @@ import { OrderComponent } from './component/user/order/order.component';
     BrowserAnimationsModule,
     WebcamModule,
     FormsModule,
+    
     
     
   ],

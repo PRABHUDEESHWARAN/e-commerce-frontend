@@ -16,6 +16,7 @@ import { UserComponent } from './component/user/user.component';
 import { CartComponent } from './component/user/cart/cart.component';
 import { ProfileComponent } from './component/user/profile/profile.component';
 import { OrderComponent } from './component/user/order/order.component';
+import { StatusComponent } from './component/user/order/status/status.component';
 
 
 const routes: Routes = [
@@ -70,7 +71,8 @@ const routes: Routes = [
     children: [
       { path: 'cart', component: CartComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'order', component: OrderComponent },
+      { path: 'order', component: OrderComponent  },
+      {path:'order/status',component:StatusComponent},
       { path: 'order/:customerId', component: OrderComponent },
     ],
   },

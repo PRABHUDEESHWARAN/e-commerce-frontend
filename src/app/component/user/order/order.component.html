@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn button-order col-md-10">
+                    <button type="button" class="btn button-order col-md-10" (click)="placeOrder(orderResponse?.order!.id)">
                         Place order
                     </button>
                 </div>
@@ -171,13 +171,13 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="DoorNo" [ngModel]="addressData.doorNo">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="DoorNo" [(ngModel)]="addressData.doorNo">
                         <label for="floatingInput">Door No</label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="City" [ngModel]="addressData.city">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="City" [(ngModel)]="addressData.city">
                         <label for="floatingInput">Street & City</label>
                     </div>
                 </div>
@@ -185,13 +185,13 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="State" [ngModel]="addressData.state">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="State" [(ngModel)]="addressData.state">
                         <label for="floatingInput">State</label>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingInput" placeholder="Pincode" [ngModel]="addressData.pincode">
+                        <input type="number" class="form-control" id="floatingInput" placeholder="Pincode" [(ngModel)]="addressData.pincode">
                         <label for="floatingInput">PinCode</label>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="handleAddressSave()" >Save changes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="handleAddressSave(orderResponse?.order!.id)" >Save changes</button>
         </div>
       </div>
     </div>
