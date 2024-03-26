@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address } from 'src/app/model/Address';
 import { Profile } from 'src/app/model/Profile';
+import { Order } from 'src/app/model/order/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class UserService {
       },
       
       
+    })
+  }
+
+  getUserOrders(customerId:number):Observable<Order[]>{
+    return this.httpClient.get<Order[]>(`${this.baseURL}/api/order/all/${customerId}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}`
+      }
     })
   }
 

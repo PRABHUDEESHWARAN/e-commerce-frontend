@@ -59,4 +59,12 @@ export class OrderService {
       }
     })
   }
+
+  getOrderById(orderId:number):Observable<Order>{
+    return this.httpClient.get<Order>(`${this.baseURL}/api/order/${orderId}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("TOKEN")}`
+      }
+    })
+  }
 }

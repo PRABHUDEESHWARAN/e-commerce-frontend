@@ -1,3 +1,5 @@
+import { Address } from "./Address";
+
 export interface Profile {
     userId:number;
     customerId:number;
@@ -8,7 +10,7 @@ export interface Profile {
     role:string;
     email: string;
     mobileNo: number;
-    address:[]
+    address:Address[];
   }
 
 

@@ -37,4 +37,12 @@ export class CartService {
       responseType:'text'
     })
   }
+
+  reduceCartItem(cartItemId:number):Observable<Cart>{
+    return this.httpClient.patch<Cart>(`${this.baseURL}/api/cart/cartItem/${cartItemId}`,null,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}`
+      }
+    })
+  }
 }

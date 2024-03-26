@@ -56,7 +56,7 @@ export class CartComponent {
                     quantity: data.quantity,
                     totalPrice: data.totalPrice
                   };
-                  this.cartItemDetails?.push(cartDetail);
+                  if(cartDetail.quantity!=0)this.cartItemDetails?.push(cartDetail);
                 },
                 error:(err)=>{
                   console.log(err);
@@ -122,11 +122,26 @@ export class CartComponent {
       }
     })
   }
-  handleMinus(){
+  handleMinus(cartItemId:number,productId:number){
+    this.cartService.reduceCartItem(cartItemId).subscribe({
+      next:(res)=>{
+        // this.cartData=res;
+        // this.cartItemDetails.filter((data)=>(data.cartItemId==cartItemId && data.quantity!=1)).map((p)=>{
+        //   p.quantity!-=1;
+        //   p.totalPrice=p.quantity!*p.product!.price;
+        //   return p;
+        // });
+        this.cartItemDetails=[]
+        this.ngOnInit();
+      },
+      error:(err)=>{
+        this.notify.showError("Cannot reduce CartItem","CarStore");
+      }
+    })
 
   }
 
   handleCheckout(customerId:number){
-   this.router.navigate(['user/order',customerId],); 
+   this.router.navigate(['user/order',customerId],);
   }
 }

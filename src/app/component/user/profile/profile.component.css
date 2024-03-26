@@ -1,0 +1,19 @@
+.franklin{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+.profile{
+    font-family:monospace
+}
+
+.tableBody{
+    height:300px;
+    width: 1000px;
+    overflow-y: auto;   
+}
+.tableHead{
+    background-color: gray;
+    width: 1000px;
+}
+.spanBtn{
+    background-color:dodgerblue
+}

@@ -42,7 +42,7 @@ export class StatusComponent {
       let scaleY = maxHeight / imgHeight;
 
       // Choose the smaller scaling factor to ensure the image fits within margins
-      const scalingFactor = Math.min(scaleX, scaleY) * 1.5;
+      const scalingFactor = Math.min(scaleX, scaleY);
       const scaledWidth = imgWidth * scalingFactor;
       const scaledHeight = imgHeight * scalingFactor;
       const imageX = (pageWidth - scaledWidth) / 2;

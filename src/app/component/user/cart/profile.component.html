@@ -1,0 +1,80 @@
+<div class="container d-flex justify-content-center flex-column my-2 rounded-3 shadow-sm p-3 ">
+    <span class="text-center franklin my-3 rounded-2 shadow-sm bg-body-tertiary "><strong>USER PROFILE</strong></span>
+    <div class="container d-flex gap-3 profile my-2 ">
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="form-control " id="floatingInputGrid" disabled placeholder="FirstName"
+                    value="{{userProfile?.firstName}}">
+                <label for="floatingInputGrid" class="fw-bold ">FirstName</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="form-control " id="floatingInputGrid" disabled placeholder="LastName"
+                    value="{{userProfile?.lastName}}">
+                <label for="floatingInputGrid" class="fw-bold ">LastName</label>
+            </div>
+        </div>
+    </div>
+    <div class="container d-flex gap-3  my-2 profile ">
+        <div class="col">
+            <div class="form-floating">
+                <input type="email" class="form-control " id="floatingInputGrid" disabled placeholder="Email"
+                    value="{{userProfile?.email}}">
+                <label for="floatingInputGrid" class="fw-bold ">Email</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="number" class="form-control " id="floatingInputGrid" disabled placeholder="MobileNo"
+                    value="{{userProfile?.mobileNo}}">
+                <label for="floatingInputGrid" class="fw-bold ">MobileNo</label>
+            </div>
+        </div>
+    </div>
+    <div class="container d-flex gap-3 my-2  profile ">
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="form-control " id="floatingInputGrid" disabled placeholder="UserName"
+                    value="{{userProfile?.username}}">
+                <label for="floatingInputGrid" class="fw-bold ">UserName</label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="form-control " id="floatingInputGrid" disabled placeholder="Role"
+                    value="{{userProfile?.role}}">
+                <label for="floatingInputGrid" class="fw-bold">Role</label>
+            </div>
+        </div>
+    </div>
+    <div class="container  d-flex   gap-3 my-2 profile" >
+        
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody class="tableBody rounded-1 w-100 " >
+                    <div  class="Container px-3 me-1 "   *ngFor="let data of userOrders" >
+                        <div class="row">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>Otto</td>
+                              </tr>
+                        </div>
+                    </div>
+                  
+                  
+                </tbody>
+              </table>
+        
+        
+    </div>
+</div>

@@ -17,6 +17,7 @@ import { CartComponent } from './component/user/cart/cart.component';
 import { ProfileComponent } from './component/user/profile/profile.component';
 import { OrderComponent } from './component/user/order/order.component';
 import { StatusComponent } from './component/user/order/status/status.component';
+import { OrderviewComponent } from './component/user/order/orderview/orderview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -85,6 +86,15 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path:'order/view/:orderId',
+        component:OrderviewComponent,
+        canActivateChild:[authGuard()],
+        children:[{
+          path: 'status',
+          component: StatusComponent,
+        },]
+      }
     ],
   },
   { path: '**', redirectTo: 'home' },

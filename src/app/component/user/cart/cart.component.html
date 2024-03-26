@@ -38,7 +38,7 @@
                                 
                             </div>
                             <div class="col-2  d-flex justify-content-end   text-center fw-bold  rounded">
-                                <div class="minus-button" (click)="handleMinus()">➖</div>
+                                <div class="minus-button" (click)="handleMinus(data.cartItemId!,data.product!.id)">➖</div>
                                 <input class="w-25 mx-3 rounded-2 shadow-sm text-center  " type=text value="{{data.quantity}}" >
                                 <div class="plus-button" (click)="handlePlus(data.product!.id)">➕</div>
                             </div>

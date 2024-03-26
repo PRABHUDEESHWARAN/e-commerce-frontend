@@ -1,26 +1,21 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, NgZone } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Address } from 'src/app/model/Address';
 import { OrderResponse } from 'src/app/model/order/OrderResponse';
+import { confirmOrderReq } from 'src/app/model/order/confirmOrderReq';
+import { OrderItemDetails } from 'src/app/model/order/orderItemDetails';
+import { TransactionDetails } from 'src/app/model/payment/TransactionDetails';
 import { NotifyService } from 'src/app/service/notify.service';
 import { OrderService } from 'src/app/service/order/order.service';
-import { ActivatedRoute } from '@angular/router';
-import { data } from 'src/assets/data';
-import { OrderItemDetails } from 'src/app/model/order/orderItemDetails';
 import { ProductsService } from 'src/app/service/products.service';
-import { productData } from 'src/assets/productData';
-import { Address } from 'src/app/model/Address';
-import { TransactionDetails } from 'src/app/model/payment/TransactionDetails';
-import { confirmOrderReq } from 'src/app/model/order/confirmOrderReq';
-import jsPDF from 'jspdf';
-import { NgZone } from '@angular/core';
 import { UserService } from 'src/app/service/user/user.service';
 declare var Razorpay: any;
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css'],
+  selector: 'app-orderview',
+  templateUrl: './orderview.component.html',
+  styleUrls: ['./orderview.component.css'],
 })
-export class OrderComponent {
+export class OrderviewComponent {
   constructor(
     private router: Router,
     private notify: NotifyService,
@@ -28,16 +23,16 @@ export class OrderComponent {
     private route: ActivatedRoute,
     private productService: ProductsService,
     private ngZone: NgZone,
-    private userService:UserService
-
+    private userService: UserService
   ) {
-    this.isStatus=false;
+    this.isStatus = false;
   }
-  isStatus:boolean=false;
+  isStatus: boolean = false;
   orderResponse?: OrderResponse;
   value: string = '';
   orderItemDetails: OrderItemDetails[] = [];
   customerId: number = 0;
+  orderId:number=0;
   addressData: Address = {
     addressId: 0,
     customerId: 0,
@@ -46,51 +41,51 @@ export class OrderComponent {
     state: '',
     pincode: 0,
   };
-  ngOnInit() {
-    this.customerId = parseInt(
-      this.route.snapshot.paramMap.get('customerId') ?? '',
+
+  ngOnInit(): void {
+    this.orderId = parseInt(
+      this.route.snapshot.paramMap.get('orderId') ?? '',
       10
     );
-    this.orderService.createOrder(this.customerId).subscribe({
-      next: (res) => {
-        this.orderResponse = res;
-        this.userService.getUserAddress(this.customerId).subscribe({
-          next:(res)=>{
-            this.orderResponse!.order.address=res[0]
-            
-          },
-          error:(err)=>{
-            this.notify.showError("Cannot load default Address","CarStore");
-          }
-        })
-        this.orderResponse.order.orderItem.map((data, _index) => {
-          const tempProduct = this.productService
-            .getProduct(data.productId)
-            .subscribe({
-              next: (res) => {
-                let orderItemData: OrderItemDetails = {
-                  orderItem: data,
-                  product: res,
-                };
-                this.orderItemDetails.push(orderItemData);
-              },
-              error: (err) => {
-                this.notify.showError('Error Fetching Details', 'E-Commerce');
-              },
-            });
-        });
-        console.log('came here');
-        console.log(this.orderResponse);
-      },
-      error: (err) => {
-        console.log(err);
-
-        this.notify.showError('Cannot create Order', 'E-Commerce');
-      },
-    });
-
+    console.log(this.orderId);
     
+    this.orderService.getOrderById(this.orderId).subscribe(
+      {
+        next: (res) => {
+          this.orderResponse={
+            order:res,
+            stockIssues:[]
+          }
+          console.log(res);
+          
+          this.orderResponse.order.orderItem.map((data, _index) => {
+            const tempProduct = this.productService
+              .getProduct(data.productId)
+              .subscribe({
+                next: (res) => {
+                  let orderItemData: OrderItemDetails = {
+                    orderItem: data,
+                    product: res,
+                  };
+                  this.orderItemDetails.push(orderItemData);
+                },
+                error: (err) => {
+                  this.notify.showError('Error Fetching Details', 'E-Commerce');
+                },
+              });
+          });
+          console.log('came here');
+          console.log(this.orderResponse);
+        },
+        error: (err) => {
+          console.log(err);
+  
+          this.notify.showError('Cannot create Order', 'E-Commerce');
+        },
+      }
+    )
   }
+
   handleAddressSave(orderId: number) {
     const newAddress = {
       customerId: this.customerId,
@@ -120,7 +115,7 @@ export class OrderComponent {
   placeOrder(orderId: number) {
     this.orderService.createTransaction(orderId).subscribe({
       next: (res) => {
-        console.log("here"+res);
+        console.log('here' + res);
 
         this.openTransactionModel(res);
       },
@@ -180,9 +175,8 @@ export class OrderComponent {
           if (res != null) {
             this.orderResponse!.order = res;
             this.notify.showSuccess('Order Updated : PAID', 'CarStore');
-            this.isStatus=true
-            this.router.navigateByUrl('user/order/status');
-            
+            this.isStatus = true;
+            this.router.navigateByUrl('user/order/view/status');
           }
         },
         error: (err) => {
