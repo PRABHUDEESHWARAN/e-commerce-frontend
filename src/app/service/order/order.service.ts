@@ -67,4 +67,12 @@ export class OrderService {
       }
     })
   }
+
+  cancelOrder(orderId:number):Observable<Order>{
+    return this.httpClient.patch<Order>(`${this.baseURL}/api/order/cancel/${orderId}`,null,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("TOKEN")}`
+      }
+    })
+  }
 }

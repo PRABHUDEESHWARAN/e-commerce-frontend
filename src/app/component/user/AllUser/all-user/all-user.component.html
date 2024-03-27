@@ -1,0 +1,29 @@
+<div class="table-container d-flex ">
+    <table class=" table d-flex table-striped rounded-2 shadow-lg  justify-content-center flex-column ">
+        <thead class="rounded-3 shadow-sm d-flex  ">
+          <div class="container  rounded-2 d-flex justify-content-between  ">
+            <span class="col mx-2 text-center fw-bold font-monospace  " >Customer Id</span>
+            <span  class="col mx-2 text-center fw-bold font-monospace " >UserName</span>
+            <span  class="col mx-2 text-center fw-bold font-monospace "  >Email</span>
+            <span  class="col mx-2 text-center  fw-bold font-monospace" >Mobile No</span>
+            <span   class="col mx-2 text-center fw-bold font-monospace" >Orders</span>
+          </div>
+        </thead>
+        <div class="container tableStyle">
+            <tbody class=" rounded-3 shadow-sm d-flex my-2 " *ngFor="let user of users">
+                <div class="container  rounded-2 d-flex  justify-content-center align-items-center "  >
+                    <span class="col mx-2 text-center " >{{user.id}}</span>
+                    <span  class="col mx-2 text-center " >{{user.firstname}}</span>
+                    <span  class="col mx-2 text-center "  >{{user.email}}</span>
+                    <span  class="col mx-2 text-center " >{{user.mobileNo}}</span>
+                    <span   class="col mx-2 text-center " >Orders</span>
+                </div>
+            
+            
+        </tbody>
+        </div>
+        
+      </table>
+</div>
+
+

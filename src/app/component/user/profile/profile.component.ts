@@ -43,8 +43,6 @@ export class ProfileComponent {
       },
     });
   }
-
-  handleCheckout(orderId:number){
-    this.router.navigate(['user/order/view',orderId])
-   }
+  
+  
 }

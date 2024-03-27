@@ -25,7 +25,8 @@ import { ProfileComponent } from './component/user/profile/profile.component';
 import { OrderComponent } from './component/user/order/order.component';
 import { StatusComponent } from './component/user/order/status/status.component';
 import { CommonModule, DatePipe } from '@angular/common';
-import { OrderviewComponent } from './component/user/order/orderview/orderview.component';
+import { DeleteUserComponent } from './component/user/deleteUser/delete-user/delete-user.component';
+import { AllUserComponent } from './component/user/AllUser/all-user/all-user.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OrderviewComponent } from './component/user/order/orderview/orderview.c
     ProfileComponent,
     OrderComponent,
     StatusComponent,
-    OrderviewComponent,
+    DeleteUserComponent,
+    AllUserComponent,
     
   ],
   imports: [

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderResponse } from 'src/app/model/order/OrderResponse';
 import { NotifyService } from 'src/app/service/notify.service';
@@ -20,7 +20,7 @@ declare var Razorpay: any;
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css'],
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit, OnDestroy{
   constructor(
     private router: Router,
     private notify: NotifyService,
@@ -91,6 +91,23 @@ export class OrderComponent {
 
     
   }
+  ngOnDestroy(): void {
+    if(this.orderResponse?.order.orderStatus=="Pending")
+    {
+      this.orderService.cancelOrder(this.orderResponse!.order.id).subscribe({
+        next:(res)=>{
+          this.orderResponse?.order.orderStatus!="Failed";
+          this.orderResponse?.order.transactionId!="Nil";
+        },
+        error:(err)=>{
+          console.log(err);
+          
+        }
+      })
+    }
+    
+  }
+
   handleAddressSave(orderId: number) {
     const newAddress = {
       customerId: this.customerId,
@@ -148,6 +165,7 @@ export class OrderComponent {
           if (res != null && res.razorpay_payment_id != null) {
             this.processResponse(res);
           } else {
+            
             this.notify.showError('Payment Failed', 'CarStore');
           }
         },

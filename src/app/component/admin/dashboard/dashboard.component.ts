@@ -12,6 +12,7 @@ import { DashboardService } from 'src/app/service/shared/shared.service';
 export class DashboardComponent {
   constructor(private router: Router,private dashboardService:DashboardService) {}
   activeProduct: string = '';
+  activeUser: string = '';
   ngOnInit() {
     this.dashboardService.activeProduct$.subscribe((value)=>{
       this.activeProduct=value;
@@ -29,6 +30,18 @@ export class DashboardComponent {
         break;
       case 'update':
         this.router.navigateByUrl(`admin/dashboard/product/update`);
+    }
+  }
+  toggleUser(value: string) {
+    this.activeUser = value;
+    console.log(this.activeUser);
+    switch (value) {
+      case 'all':
+        this.router.navigateByUrl('admin/dashboard/user/all');
+        break;
+      case 'del':
+        this.router.navigateByUrl(`admin/dashboard/user/del`);
+        break;
     }
   }
 }

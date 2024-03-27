@@ -15,5 +15,14 @@
     width: 1000px;
 }
 .spanBtn{
+    cursor: pointer;;
     background-color:dodgerblue
+    
+}
+
+.success{
+    background-color:limegreen
+}
+.failure{
+    background-color: red;
 }

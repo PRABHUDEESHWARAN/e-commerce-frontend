@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address } from 'src/app/model/Address';
+import { Customer } from 'src/app/model/Customer';
 import { Profile } from 'src/app/model/Profile';
 import { Order } from 'src/app/model/order/Order';
 
@@ -43,6 +44,22 @@ export class UserService {
 
   getUserOrders(customerId:number):Observable<Order[]>{
     return this.httpClient.get<Order[]>(`${this.baseURL}/api/order/all/${customerId}`,{
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('TOKEN')}`
+      }
+    })
+  }
+
+
+  deleteUser(customerId:number):Observable<string>{
+    return this.httpClient.delete(`${this.baseURL}/api/customer/${customerId}`,{
+      headers:{
+        Authorization:`Bearer ${localStorage.getItem('TOKEN')}`
+      },responseType:'text'
+    })
+  }
+  getAllUsers():Observable<Customer[]>{
+    return this.httpClient.get<Customer[]>(`${this.baseURL}/api/customer/all`,{
       headers:{
         Authorization: `Bearer ${localStorage.getItem('TOKEN')}`
       }

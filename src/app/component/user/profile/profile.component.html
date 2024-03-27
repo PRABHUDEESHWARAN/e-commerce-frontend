@@ -52,28 +52,28 @@
         <div class="row d-flex flex-column ">
             <header class="profile text-uppercase fw-bold text-center  rounded-2 shadow-sm  ">Order History</header>
             <div class="container d-flex justify-content-between border border-1 align-items-center  my-2 rounded-2 shadow-sm tableHead ">
-                <span class="me-3 "><input type="text" name="order" id="order" disabled class="form-control fw-bold  text-center shadow-sm   "
-                        value="Order Id"></span>
+                <span class="me-3 "><input type="text"  name="order" id="order" disabled class="form-control fw-bold  text-center shadow-sm   "
+                        value="Order Date"></span>
                 <span class="me-3">
                     <input type="text" name="order" id="order" disabled class="form-control fw-bold text-center  shadow-sm "
                         value="TransactionId">
                 </span>
                 <span class="me-3"><input type="text" name="order" id="order" disabled class="form-control fw-bold text-center shadow-sm  "
                     value="Order Status"></span>
-                    <span class="p-3 "><input class="form-control  fw-bolder font-monospace rounded-2 shadow-sm border-0 spanBtn text-center " value="Action"></span>
+                    <span class="p-3 "><input class="form-control  fw-bolder font-monospace rounded-2 shadow-sm border-0  text-center " disabled  value="Amount"></span>
             </div>
             <tbody class="tableBody shadow-sm  rounded-1 p-3 bg-body-tertiary  ">
                 <tr *ngFor="let data of userOrders">
                     <div class="container d-flex justify-content-between border border-1 align-items-center  my-2 rounded-2 shadow-sm  ">
                         <span class="me-3 "><input type="text" name="order" id="order" disabled class="form-control fw-bold  text-center shadow-sm   "
-                                value="{{data.id}}"></span>
+                                value="{{data.orderDate}}"></span>
                         <span class="me-3">
                             <input type="text" name="order" id="order" disabled class="form-control fw-bold text-center  shadow-sm "
                                 value="{{data.transactionId}}">
                         </span>
-                        <span class="me-3"><input type="text" name="order" id="order" disabled class="form-control fw-bold text-center shadow-sm  "
+                        <span class="me-3"><input type="text" name="order" id="order" disabled class="form-control fw-bold text-center shadow-sm {{data.orderStatus=='Paid'? 'success ':' failure '}}  "
                             value="{{data.orderStatus}}"></span>
-                        <span class="p-3 " (click)="handleCheckout(data.id)"><input class="form-control border border-1  fw-bolder font-monospace rounded-2 shadow-sm border-0 spanBtn text-center " value="View Order"></span>
+                        <span class="p-3 "><input disabled  class="form-control border border-1  fw-bolder font-monospace rounded-2 shadow-sm border-0 spanBtn text-center " value="{{data.totalPrice|currency:'INR'}}"></span>
                     </div>
                 </tr>
             </tbody>

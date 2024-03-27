@@ -87,6 +87,7 @@ export class CartComponent {
       },
     });
   }
+  
   removeCartItem(cartItemId:number){
     this.cartService.removeCartItem(cartItemId).subscribe({
       next:(res)=>{
@@ -125,6 +126,10 @@ export class CartComponent {
   handleMinus(cartItemId:number,productId:number){
     this.cartService.reduceCartItem(cartItemId).subscribe({
       next:(res)=>{
+        console.log("now here");
+        
+        console.log(res);
+        
         // this.cartData=res;
         // this.cartItemDetails.filter((data)=>(data.cartItemId==cartItemId && data.quantity!=1)).map((p)=>{
         //   p.quantity!-=1;

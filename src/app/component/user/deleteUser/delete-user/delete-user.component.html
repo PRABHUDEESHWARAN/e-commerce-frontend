@@ -1,0 +1,29 @@
+<div class="container-fluid rounded-2 shadow-lg  p-xl-3">
+    <form [formGroup]="deleteForm">
+      <div class="row">
+        <div
+          class="mb-3 d-flex align-items-center justify-content-center flex-column"
+        >
+          <label for="id" class="form-label fw-bold"
+            >Enter User Id to Delete</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="id"
+            placeholder="Enter Customer Id"
+            formControlName="id"
+          />
+        </div>
+      </div>
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="handleDeleteUser(deleteForm)"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>

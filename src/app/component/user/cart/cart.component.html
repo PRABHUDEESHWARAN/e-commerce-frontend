@@ -15,10 +15,10 @@
                     </div>
                 </thead>
                 <tbody class="ItemContainer   rounded-1 w-100   " >
-                    <div  class="Container px-3 me-1 "   *ngFor="let data of cartItemDetails" >
+                    <div  class="Container px-3 me-1 "   *ngFor="let data of cartItemDetails;let i=index" >
                         <div class="row shadow-sm my-2  bg-body-tertiary rounded d-flex justify-content-center align-items-center">
                             <div class="d-flex justify-content-end " ><span (click)="data.cartItemId && removeCartItem(data.cartItemId)"><i class="bi bi-x-circle-fill"></i></span></div>
-                            <div class="col-1   text-center fw-bold rounded ">{{data.cartItemId}}</div>
+                            <div class="col-1   text-center fw-bold rounded ">{{i+1}}</div>
                             <div class="col-7   text-center fw-bold rounded ">
                                 <div class="row">
                                     <div class="col-6  ">
@@ -37,9 +37,9 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-2  d-flex justify-content-end   text-center fw-bold  rounded">
+                            <div class="col-2  d-flex justify-content-end align-items-baseline   text-center fw-bold  rounded">
                                 <div class="minus-button" (click)="handleMinus(data.cartItemId!,data.product!.id)">➖</div>
-                                <input class="w-25 mx-3 rounded-2 shadow-sm text-center  " type=text value="{{data.quantity}}" >
+                                <input class="w-25 m-1  text-center p-1 " type=text value="{{data.quantity}}" >
                                 <div class="plus-button" (click)="handlePlus(data.product!.id)">➕</div>
                             </div>
                             <div class="col-2   text-center fw-bold rounded ">{{data.totalPrice|currency:'INR'}}</div>
