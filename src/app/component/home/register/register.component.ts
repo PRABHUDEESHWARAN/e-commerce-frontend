@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { NotifyService } from 'src/app/service/notify.service';
@@ -17,13 +17,13 @@ export class RegisterComponent {
   ) {}
 
   registerForm: FormGroup = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-    mobileNo: new FormControl(null),
-    password: new FormControl(''),
-    role: new FormControl(''),
-    username: new FormControl(''),
+    firstName: new FormControl('',[Validators.required,Validators.maxLength(10)]),
+    lastName: new FormControl('',[Validators.required,Validators.maxLength(10)]),
+    email: new FormControl('',[Validators.required,Validators.email]),
+    mobileNo: new FormControl(null,[Validators.min(10),Validators.required]),
+    password: new FormControl('',[Validators.required,Validators.minLength(3),Validators.pattern('^(?=.*\\d)[0-9a-zA-Z@#$%]{6,}$')]),
+    role: new FormControl('',[Validators.required]),
+    username: new FormControl('',[Validators.required,Validators.nullValidator,Validators.minLength(3),Validators.pattern('[A-Za-z ]{3,}')]),
   });
 
   registerUser(form: FormGroup) {

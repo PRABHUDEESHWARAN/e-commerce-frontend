@@ -1,9 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { NotifyService } from 'src/app/service/notify.service';
+import { UserService } from 'src/app/service/user/user.service';
+import { Login } from 'src/app/model/Login';
+import { User } from 'src/app/model/User';
+
 
 @Component({
   selector: 'app-login',
@@ -14,14 +18,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private notify: NotifyService
+    private notify: NotifyService,
+    private userService:UserService,
+    private fb: FormBuilder
   ) {}
+  usernameError: string = '';
 
-  loginForm: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+  loginForm: FormGroup = this.fb.group({
+    username: ['',[Validators.required,Validators.nullValidator,Validators.minLength(3),Validators.pattern('[A-Za-z ]{3,}')]],
+    password: ['',[Validators.required,Validators.minLength(6),Validators.pattern('^(?=.*\\d)[0-9a-zA-Z@#$%]{6,}$')]],
   });
-
+ 
   ngOnInit() {
     this.authService.isLoggedIn().subscribe((res) => {
       this.authService.isAuthenticated = res.valid;

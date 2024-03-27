@@ -28,6 +28,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { DeleteUserComponent } from './component/user/deleteUser/delete-user/delete-user.component';
 import { AllUserComponent } from './component/user/AllUser/all-user/all-user.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,11 +64,8 @@ import { AllUserComponent } from './component/user/AllUser/all-user/all-user.com
     BrowserAnimationsModule,
     WebcamModule,
     FormsModule,
-    CommonModule
-    
-    
-    
-    
+    CommonModule,
+  
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

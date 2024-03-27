@@ -21,6 +21,10 @@
           formControlName="firstName"
           placeholder="Enter your first name"
         />
+        <div class="validation-message" *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)">
+          <div class="text-wrap" *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</div>
+          <div class="text-wrap" *ngIf="registerForm.get('firstName')?.errors?.['maxlength']">First Name cannot exceed 10 characters.</div>
+        </div>
       </div>
       <div
         class="mb-3 d-flex align-items-center justify-content-center flex-column"
@@ -33,6 +37,10 @@
           formControlName="lastName"
           placeholder="Enter your last name"
         />
+        <div class="validation-message" *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)">
+          <div class="text-wrap" *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</div>
+          <div class="text-wrap" *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name cannot exceed 10 characters.</div>
+        </div>
       </div>
       <div
         class="mb-3 d-flex align-items-center justify-content-center flex-column"
@@ -45,6 +53,10 @@
           placeholder="Enter your email"
           formControlName="email"
         />
+        <div class="validation-message" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div>
+        </div>
       </div>
 
       <div
@@ -58,6 +70,11 @@
           placeholder="Enter your mobile number"
           formControlName="mobileNo"
         />
+        <div class="validation-message" *ngIf="registerForm.get('mobileNo')?.invalid && (registerForm.get('mobileNo')?.dirty || registerForm.get('mobileNo')?.touched)">
+          <div *ngIf="registerForm.get('mobileNo')?.errors?.['required']">Mobile Number is required.</div>
+          <div class="text-wrap" *ngIf="registerForm.get('mobileNo')?.errors?.['min']">Mobile Number must be at least 10 digits.</div>
+          <div class="text-wrap" *ngIf="registerForm.get('mobileNo')?.errors?.['max']">Mobile Number cannot exceed 10 digits.</div>
+        </div>
       </div>
       <div
         class="mb-3 d-flex align-items-center justify-content-center flex-column"
@@ -92,6 +109,11 @@
           placeholder="Set your password"
           formControlName="password"
         />
+        <div class="validation-message" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div class="text-wrap " *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+          <div class="text-wrap " *ngIf="registerForm.get('password')?.errors?.['pattern']">Password should be a minimum of 6 characters long and must contain at least one number.</div>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
