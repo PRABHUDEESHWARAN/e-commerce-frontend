@@ -2,7 +2,7 @@
   <div class="container-fluid d-flex justify-content-between">
     <div>
       <button (click)="handleEcom()" class="btn navbar-brand fw-bold">
-        E-Commerce
+        CarStore🚘
       </button>
     </div>
     <div>
@@ -37,6 +37,14 @@
             role="button"
             (click)="handleDashBoard()"
             >DashBoard</a
+          >
+        </div>
+        <div *ngIf="authService.isAuthenticated">
+          <a
+            class="btn btn-primary mx-2 fw-bold"
+            role="button"
+            (click)="handleChatBot()"
+            >ChatBot</a
           >
         </div>
         <div class="container-fluid d-flex justify-content-between " *ngIf="authService.isAuthenticated">

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Cart } from 'src/app/model/cart';
 import { UserService } from '../user/user.service';
 import { CartResponse } from 'src/app/model/CartResponse';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   constructor(private httpClient: HttpClient) {}
-  baseURL = `http://localhost:8080`;
+  baseURL = environment.baseUrl;
 
   getCartData(customerId: number) {
     // get the customer's cart with customer id.

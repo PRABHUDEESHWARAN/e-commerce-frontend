@@ -17,19 +17,23 @@ export class DeleteProductComponent {
     id:new FormControl()
   })
   handleDeleteProduct(form:FormGroup){
+    let text=`Are you sure you want to Delete the product:${form.value['id']} `
     console.log(form.value['id']);
+    if(confirm(text)==true)
+    {
+      this.productService.deleteProduct(form.value['id']).subscribe({
+        next:(res)=>{
+          this.notify.showSuccess("Product Deleted Successfully","Info😺")
+          this.deleteForm.reset()
+        },
+        error:(err)=>{
+          this.notify.showError("Can't Delete Product","Info😿")
+          console.log(err.message);
+          
+        }
+  
+      })
+    }
     
-    this.productService.deleteProduct(form.value['id']).subscribe({
-      next:(res)=>{
-        this.notify.showSuccess("Product Deleted Successfully","Info😺")
-        this.deleteForm.reset()
-      },
-      error:(err)=>{
-        this.notify.showError("Can't Delete Product","Info😿")
-        console.log(err.message);
-        
-      }
-
-    })
   }
 }

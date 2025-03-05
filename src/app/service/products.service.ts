@@ -4,6 +4,7 @@ import { Product } from '../model/Product';
 import { SearchPrediction } from '../model/SearchPrediction';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  baseURL = `http://localhost:8080`;
+  baseURL = environment.baseUrl;
 
   getAllProducts() {
     return this.http.get<Product[]>(`${this.baseURL}/api/product/all`, {

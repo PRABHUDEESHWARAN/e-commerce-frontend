@@ -14,19 +14,23 @@ export class DeleteUserComponent {
     id:new FormControl()
   })
   handleDeleteUser(form:FormGroup){
+    let text=`Are you sure you want to Delete the User:${form.value['id']} `
     console.log(form.value['id']);
+    if(confirm(text)==true)
+    {
+      this.userService.deleteUser(form.value['id']).subscribe({
+        next:(res)=>{
+          this.notify.showSuccess("User Deleted Successfully","Info😺")
+          this.deleteForm.reset()
+        },
+        error:(err)=>{
+          this.notify.showError("Can't Delete User","Info😿")
+          console.log(err.message);
+          
+        }
+  
+      })
+    }
     
-    this.userService.deleteUser(form.value['id']).subscribe({
-      next:(res)=>{
-        this.notify.showSuccess("User Deleted Successfully","Info😺")
-        this.deleteForm.reset()
-      },
-      error:(err)=>{
-        this.notify.showError("Can't Delete User","Info😿")
-        console.log(err.message);
-        
-      }
-
-    })
   }
 }

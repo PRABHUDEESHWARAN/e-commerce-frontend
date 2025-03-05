@@ -6,13 +6,14 @@ import { Order } from 'src/app/model/order/Order';
 import { OrderResponse } from 'src/app/model/order/OrderResponse';
 import { confirmOrderReq } from 'src/app/model/order/confirmOrderReq';
 import { TransactionDetails } from 'src/app/model/payment/TransactionDetails';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
   constructor(private httpClient: HttpClient) {}
-  baseURL = `http://localhost:8080`;
+  baseURL = environment.baseUrl;
 
   createOrder(customerId: number): Observable<OrderResponse> {
     console.log('camere here');

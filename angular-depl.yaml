@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carstore-frontend-deployment
+spec:
+  replicas: 1 # Number of pods you want to run
+  selector:
+    matchLabels:
+      app: carstore-frontend
+  template:
+    metadata:
+      labels:
+        app: carstore-frontend
+    spec:
+      serviceAccountName: gke-artifact-reader-sa
+      containers:
+      - name: carstore-frontend
+        image: us-central1-docker.pkg.dev/ford-629e9fe73e712fb23f0ebbec/carstore-repo/carstore-frontend:latest
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "200m"  # Request half a CPU core
+          limits:
+            memory: "1024Mi"
+            cpu: "300m"
+        ports:
+          - containerPort: 80
+      

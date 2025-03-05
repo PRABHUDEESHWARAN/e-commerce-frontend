@@ -6,6 +6,7 @@ import { User } from '../model/User';
 import { catchError, throwError } from 'rxjs';
 import { NotifyService } from './notify.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class AuthService implements OnInit {
     console.log("Auth constructor !")
   }
 
-  baseURL = `http://localhost:8080`;
+  baseURL = environment.baseUrl;
 
   isAuthenticated?: boolean;
   isAdmin?: boolean;

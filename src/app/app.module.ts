@@ -27,6 +27,9 @@ import { StatusComponent } from './component/user/order/status/status.component'
 import { CommonModule, DatePipe } from '@angular/common';
 import { DeleteUserComponent } from './component/user/deleteUser/delete-user/delete-user.component';
 import { AllUserComponent } from './component/user/AllUser/all-user/all-user.component';
+import { ChatbotComponent } from './component/chatbot/chatbot.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { StreamChatModule, StreamAutocompleteTextareaModule } from 'stream-chat-angular';
 
 
 @NgModule({
@@ -51,7 +54,7 @@ import { AllUserComponent } from './component/user/AllUser/all-user/all-user.com
     StatusComponent,
     DeleteUserComponent,
     AllUserComponent,
-    
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,9 @@ import { AllUserComponent } from './component/user/AllUser/all-user/all-user.com
     WebcamModule,
     FormsModule,
     CommonModule,
+    TranslateModule.forRoot(),
+    StreamAutocompleteTextareaModule,
+    StreamChatModule
   
   ],
   providers: [DatePipe],

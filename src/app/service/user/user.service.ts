@@ -5,6 +5,7 @@ import { Address } from 'src/app/model/Address';
 import { Customer } from 'src/app/model/Customer';
 import { Profile } from 'src/app/model/Profile';
 import { Order } from 'src/app/model/order/Order';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { Order } from 'src/app/model/order/Order';
 export class UserService {
 
   constructor(private httpClient:HttpClient) { }
-  baseURL = `http://localhost:8080`;
+  baseURL = environment.baseUrl;
 
 
 

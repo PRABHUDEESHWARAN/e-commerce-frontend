@@ -38,4 +38,8 @@ export class NavBarComponent {
   handleProfileToggle(){
     this.router.navigateByUrl('user/profile');
   }
+
+  handleChatBot(){
+    this.router.navigateByUrl('/chatbot');
+  }
 }

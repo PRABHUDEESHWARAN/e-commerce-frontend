@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/home/login/login.component';
+import { ChatbotComponent } from './component/chatbot/chatbot.component';
 import { RegisterComponent } from './component/home/register/register.component';
 import { ProductComponent } from './component/product/product.component';
 import { authGuard } from './guard/auth.guard';
@@ -65,6 +66,11 @@ const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path:'chatbot',
+    component: ChatbotComponent,
+    children:[]
   },
   {
     path: 'user',

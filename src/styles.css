@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'stream-chat-angular/src/assets/styles/css/index.css';
 body {
   min-height: 100vh;
+}
+#root {
+  display: flex; /* Use flexbox to layout children horizontally */
+  height: 100vh; /* Ensure the layout takes the full viewport height */
+}
+
+stream-channel-list {
+  flex: 0 0 250px; /* Fix the width of the channel list */
+  border-right: 1px ; /* Optional: a border to separate from the chat */
+  overflow-y: auto; /* Allow scrolling if needed */
+}
+
+stream-channel {
+  flex: 1; /* Take up the remaining space */
+  display: flex;
+  flex-direction: column; /* Arrange children vertically */
 }
